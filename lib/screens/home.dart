@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scorn_clone/widget/badge_widget.dart';
+import '../widget/icon_button_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -26,18 +27,23 @@ class _HomeState extends State<Home> {
             )
           ]),
           actions: [
-            IconButton(
-                onPressed: () {},
+            IconButtonWidget(
+                iconSize: 20,
+                padding: EdgeInsets.zero,
                 icon: const Icon(
                   Icons.add,
                   color: Colors.grey,
                 )),
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.more_horiz,
-                  color: Colors.grey,
-                ))
+            Padding(
+              padding: const EdgeInsets.only(right: 15, left: 15),
+              child: IconButtonWidget(
+                  iconSize: 20,
+                  padding: EdgeInsets.zero,
+                  icon: const Icon(
+                    Icons.more_horiz,
+                    color: Colors.grey,
+                  )),
+            )
           ],
         ),
         body: Container());

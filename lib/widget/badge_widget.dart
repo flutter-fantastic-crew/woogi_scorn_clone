@@ -16,12 +16,12 @@ class BadgeWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40), color: backgroundColor),
-      width: 28,
-      height: 17,
+      width: 35,
+      height: 20,
       child: Center(
         child: Text(
           badgeText,
-          style: TextStyle(fontSize: 10, color: textColor),
+          style: TextStyle(fontSize: 12, color: textColor),
         ),
       ),
     );
