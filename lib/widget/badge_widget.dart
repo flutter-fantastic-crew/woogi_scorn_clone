@@ -5,23 +5,28 @@ class BadgeWidget extends StatelessWidget {
       {Key? key,
       required this.badgeText,
       required this.backgroundColor,
-      required this.textColor})
+      required this.textColor,
+      this.onTap})
       : super(key: key);
   String badgeText;
   Color backgroundColor;
   Color textColor;
+  Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(40), color: backgroundColor),
-      width: 35,
-      height: 20,
-      child: Center(
-        child: Text(
-          badgeText,
-          style: TextStyle(fontSize: 12, color: textColor),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40), color: backgroundColor),
+        width: 35,
+        height: 20,
+        child: Center(
+          child: Text(
+            badgeText,
+            style: TextStyle(fontSize: 12, color: textColor),
+          ),
         ),
       ),
     );

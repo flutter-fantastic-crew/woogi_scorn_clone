@@ -40,6 +40,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             badgeText: "요약",
             backgroundColor: Colors.grey,
             textColor: Colors.white,
+            onTap: () {},
           )
         ]),
         actions: [
