@@ -74,8 +74,101 @@ class CustomDraggableBottomSheet extends StatefulWidget {
 
 class _CustomDraggableBottomSheetState
     extends State<CustomDraggableBottomSheet> {
+  double _currentExtent = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentExtent = widget.collapsed ? widget.minExtent : widget.maxExtent;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return widget.useSafeArea ? SafeArea(child: _body()) : _body();
+  }
+
+  /// body content
+  Widget _body() {
+    return Stack(
+      children: [
+        // background widget
+        widget.backgroundWidget,
+        // barrier
+        if (_currentExtent.roundToDouble() > widget.minExtent + 0.1)
+          Positioned.fill(child: _barrier()),
+        // sheet
+        Align(alignment: widget.alignment, child: _sheet()),
+      ],
+    );
+  }
+
+  /// barrier film between sheet & background widget
+  Widget _barrier() {
+    return IgnorePointer(
+      ignoring: !widget.barrierDismissible,
+      child: GestureDetector(
+        onTap: widget.barrierDismissible
+            ? () => setState(() => _currentExtent = widget.minExtent)
+            : null,
+        child: Container(color: widget.barrierColor),
+      ),
+    );
+  }
+
+  /// draggable bottom sheet
+  Widget _sheet() {
+    return GestureDetector(
+      onVerticalDragUpdate: _onVerticalDragUpdate,
+      onHorizontalDragUpdate: _onHorizontalDragUpdate,
+      child: AnimatedContainer(
+        curve: widget.curve,
+        duration: widget.duration,
+        width: _axis() == Axis.horizontal ? _currentExtent : null,
+        height: _axis() == Axis.horizontal ? null : _currentExtent,
+        child: _currentExtent >= widget.minExtent + widget.expansionExtent
+            ? widget.expandedWidget
+            : widget.previewWidget,
+      ),
+    );
+  }
+
+  /// determine scroll direction based on DraggableBottomSheetPosition
+  Axis _axis() {
+    if (widget.alignment == Alignment.topLeft ||
+        widget.alignment == Alignment.topRight ||
+        widget.alignment == Alignment.topCenter ||
+        widget.alignment == Alignment.bottomLeft ||
+        widget.alignment == Alignment.bottomRight ||
+        widget.alignment == Alignment.bottomCenter) {
+      return Axis.vertical;
+    }
+
+    return Axis.horizontal;
+  }
+
+  /// callback function when sheet is dragged horizontally
+  void _onHorizontalDragUpdate(DragUpdateDetails details) {
+    if (_axis() == Axis.vertical) return;
+
+    // delta dx is positive when dragged towards right &
+    // negative when dragged towards left
+    final newExtent = (_currentExtent + details.delta.dx).roundToDouble();
+    if (newExtent >= widget.minExtent && newExtent <= widget.maxExtent) {
+      setState(() => _currentExtent = newExtent);
+      widget.onDragging(_currentExtent);
+    }
+  }
+
+  /// callback function when sheet is dragged vertically
+  void _onVerticalDragUpdate(DragUpdateDetails details) {
+    if (_axis() == Axis.horizontal) return;
+
+    // delta dy is positive when dragged downward &
+    // negetive when dragged upward
+    final newExtent = (_currentExtent - details.delta.dy).roundToDouble();
+    if (newExtent >= widget.minExtent && newExtent <= widget.maxExtent) {
+      setState(() => _currentExtent = newExtent);
+      widget.onDragging(_currentExtent);
+    }
   }
 }
