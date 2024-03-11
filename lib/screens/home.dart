@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scorn_clone/view_model/home_page_view_model.dart';
 import 'package:scorn_clone/widget/badge_widget.dart';
 import 'package:scorn_clone/widget/plan_card_widget.dart';
+import 'package:scorn_clone/widget/summary_info_bottom_sheet.dart';
 import '../widget/icon_button_widget.dart';
 
 class Home extends StatefulWidget {
@@ -40,7 +41,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             badgeText: "요약",
             backgroundColor: Colors.grey,
             textColor: Colors.white,
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(context: context,isScrollControlled: true,builder:(context) {
+                return SizedBox(height: MediaQuery.of(context).size.height * 0.8,child: SummaryInfoBottomSheet(),);
+              });
+            },
           )
         ]),
         actions: [
