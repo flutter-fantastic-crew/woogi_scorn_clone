@@ -31,23 +31,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(children: [
-          const Padding(
-            padding: EdgeInsets.only(right: 11),
-            child: Text("내 플랜",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          ),
-          BadgeWidget(
-            badgeText: "요약",
-            backgroundColor: Colors.grey,
-            textColor: Colors.white,
-            onTap: () {
-              showModalBottomSheet(context: context,isScrollControlled: true,builder:(context) {
-                return SizedBox(height: MediaQuery.of(context).size.height * 0.8,child: SummaryInfoBottomSheet(),);
-              });
-            },
-          )
-        ]),
+        title: GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) {
+                  return FractionallySizedBox(
+                    heightFactor: 0.8,
+                    widthFactor: 1.0,
+                    child: SummaryInfoBottomSheet(),
+                  );
+                });
+          },
+          child: Row(children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 11),
+              child: Text("내 플랜",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
+            BadgeWidget(
+              badgeText: "요약",
+              backgroundColor: Colors.grey,
+              textColor: Colors.white,
+              onTap: () {},
+            )
+          ]),
+        ),
         actions: [
           IconButtonWidget(
               iconSize: 20,
