@@ -35,13 +35,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           onTap: () {
             showModalBottomSheet(
                 context: context,
-                isScrollControlled: true,
+                scrollControlDisabledMaxHeightRatio: 0.88,
                 builder: (context) {
-                  return FractionallySizedBox(
-                    heightFactor: 0.8,
-                    widthFactor: 1.0,
-                    child: SummaryInfoBottomSheet(),
-                  );
+                  return SummaryInfoBottomSheet();
                 });
           },
           child: Row(children: [
