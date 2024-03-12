@@ -5,8 +5,8 @@ class SummaryInfoBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return Container(
-      padding: const EdgeInsets.all(16),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -18,8 +18,8 @@ class SummaryInfoBottomSheet extends StatelessWidget {
         children: <Widget>[
           Center(
             child: Container(
-              width: 40,
-              height: 6,
+              width: 45,
+              height: 4,
               decoration: BoxDecoration(
                 color: Colors.grey,
                 borderRadius: BorderRadius.circular(10),
@@ -27,13 +27,26 @@ class SummaryInfoBottomSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Drag',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                '요약',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                '대한민국 - 원 v',
+                style: TextStyle(
+                  color: Colors.grey[400],
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
         ],
       ),
