@@ -25,7 +25,11 @@ class BadgeWidget extends StatelessWidget {
         child: Center(
           child: Text(
             badgeText,
-            style: TextStyle(fontSize: 12, color: textColor),
+            style: TextStyle(
+              fontSize: 12,
+              color: textColor,
+              fontFamily: 'PretendardRegular',
+            ),
           ),
         ),
       ),

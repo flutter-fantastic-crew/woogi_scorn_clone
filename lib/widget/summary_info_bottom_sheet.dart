@@ -33,10 +33,9 @@ class SummaryInfoBottomSheet extends StatelessWidget {
               const Text(
                 '요약',
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontFamily: 'PretendardBold'),
               ),
               Text(
                 '대한민국 - 원 v',

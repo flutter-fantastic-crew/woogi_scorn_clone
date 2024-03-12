@@ -48,7 +48,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             const Padding(
               padding: EdgeInsets.only(right: 11),
               child: Text("내 플랜",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  style: TextStyle(fontSize: 18, fontFamily: 'PretendardBold')),
             ),
             BadgeWidget(
               badgeText: "요약",
