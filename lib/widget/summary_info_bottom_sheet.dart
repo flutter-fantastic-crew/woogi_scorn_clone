@@ -47,6 +47,65 @@ class SummaryInfoBottomSheet extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("총 소비",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontFamily: 'PretendardMedium',
+                                )),
+                            Text("20원",
+                                style: TextStyle(
+                                  fontFamily: 'PretendardBold',
+                                )),
+                          ],
+                        ),
+                      )),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("총 소비",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontFamily: 'PretendardMedium',
+                                )),
+                            Text("20원",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontFamily: 'PretendardBold',
+                                )),
+                          ],
+                        ),
+                      )),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
