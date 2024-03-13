@@ -69,7 +69,7 @@ flutter:
     - family: PretendardRegular
       fonts:
         - asset: assets/fonts/Pretendard-Regular.otf
-    - family: PretendardRegular
+    - family: PretendardMedium
       fonts:
         - asset: assets/fonts/Pretendard-Medium.otf
 
