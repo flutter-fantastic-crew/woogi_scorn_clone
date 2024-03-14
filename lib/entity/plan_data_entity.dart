@@ -9,7 +9,6 @@ class PlanDataEntity {
   String planName; // 플랜 이름
   Icon planIcon; // 플랜 아이콘
   List<PlanHistoryEntity> planHistory; // 플랜예산 기록 리스트
-  int totalPlan; // 총금액
 
   PlanDataEntity(
       {required this.planId,
@@ -18,8 +17,7 @@ class PlanDataEntity {
       required this.planMemo,
       required this.planName,
       required this.planIcon,
-      required this.planHistory,
-      required this.totalPlan});
+      required this.planHistory});
 
   int get totalExpenses =>
       planHistory.map((e) => e.expenses).reduce((sum, value) => sum + value);

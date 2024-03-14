@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../entity/plan_data_entity.dart';
+import 'amount_title_container.dart';
+
 class SummaryInfoBottomSheet extends StatelessWidget {
-  const SummaryInfoBottomSheet({super.key});
+  SummaryInfoBottomSheet({
+    super.key,
+    required this.totalIncome,
+    required this.totalConsumption,
+  });
+
+  int totalIncome;
+  int totalConsumption;
 
   @override
   Widget build(BuildContext context) {
@@ -27,83 +37,44 @@ class SummaryInfoBottomSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                '요약',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontFamily: 'PretendardBold'),
-              ),
-              Text(
-                '대한민국 - 원 v',
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  '요약',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontFamily: 'PretendardBold'),
                 ),
-              ),
-            ],
+                Text(
+                  '대한민국 - 원 v',
+                  style: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
           Row(
             children: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("총 소비",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontFamily: 'PretendardMedium',
-                                )),
-                            Text("20원",
-                                style: TextStyle(
-                                  fontFamily: 'PretendardBold',
-                                )),
-                          ],
-                        ),
-                      )),
-                ),
-              ),
+                  child: AmountTitleContainer(
+                title: "총 소비",
+                amount: totalConsumption,
+                padding: const EdgeInsets.only(right: 8),
+              )),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("총 소비",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontFamily: 'PretendardMedium',
-                                )),
-                            Text("20원",
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontFamily: 'PretendardBold',
-                                )),
-                          ],
-                        ),
-                      )),
-                ),
-              ),
+                  child: AmountTitleContainer(
+                title: "총 수입",
+                amount: totalIncome,
+                amountColor: const Color(0xFF00B75F),
+                padding: const EdgeInsets.only(left: 8),
+              )),
             ],
           )
         ],

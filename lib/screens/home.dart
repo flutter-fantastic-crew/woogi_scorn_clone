@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -29,63 +29,70 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-                context: context,
-                scrollControlDisabledMaxHeightRatio: 0.88,
-                builder: (context) {
-                  return SummaryInfoBottomSheet();
-                });
-          },
-          child: Row(children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 11),
-              child: Text("내 플랜",
-                  style: TextStyle(fontSize: 18, fontFamily: 'PretendardBold')),
-            ),
-            BadgeWidget(
-              badgeText: "요약",
-              backgroundColor: Colors.grey,
-              textColor: Colors.white,
-              onTap: () {},
-            )
-          ]),
-        ),
-        actions: [
-          IconButtonWidget(
-              iconSize: 20,
-              padding: EdgeInsets.zero,
-              icon: const Icon(
-                Icons.add,
-                color: Colors.grey,
-              )),
-          Padding(
-            padding: const EdgeInsets.only(right: 15, left: 15),
-            child: IconButtonWidget(
-                iconSize: 20,
-                padding: EdgeInsets.zero,
-                icon: const Icon(
-                  Icons.more_horiz,
-                  color: Colors.grey,
-                )),
-          )
-        ],
-        backgroundColor: Colors.grey[300],
-      ),
-      backgroundColor: Colors.grey[300],
-      body: ChangeNotifierProvider<HomePageViewModel>(
-        create: (_) => HomePageViewModel(),
-        builder: (context, child) {
-          return Consumer<HomePageViewModel>(
-            builder: (context, homePageViewModel, _) {
-              _tabController = TabController(
-                  length: homePageViewModel.plans.length,
-                  vsync: this,
-                  initialIndex: 0);
-              return Stack(
+    return ChangeNotifierProvider<HomePageViewModel>(
+      create: (_) => HomePageViewModel(),
+      builder: (context, child) {
+        return Consumer<HomePageViewModel>(
+          builder: (context, homePageViewModel, _) {
+            _tabController = TabController(
+                length: homePageViewModel.plans.length,
+                vsync: this,
+                initialIndex: 0);
+            return Scaffold(
+              appBar: AppBar(
+                title: GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        scrollControlDisabledMaxHeightRatio: 0.88,
+                        builder: (_) {
+                          return SummaryInfoBottomSheet(
+                            totalConsumption: context
+                                .read<HomePageViewModel>()
+                                .totalConsumption,
+                            totalIncome:
+                                context.read<HomePageViewModel>().totalIncome,
+                          );
+                        });
+                  },
+                  child: Row(children: [
+                    const Padding(
+                      padding: EdgeInsets.only(right: 11),
+                      child: Text("내 플랜",
+                          style: TextStyle(
+                              fontSize: 18, fontFamily: 'PretendardBold')),
+                    ),
+                    BadgeWidget(
+                      badgeText: "요약",
+                      backgroundColor: Colors.grey,
+                      textColor: Colors.white,
+                      onTap: () {},
+                    )
+                  ]),
+                ),
+                actions: [
+                  IconButtonWidget(
+                      iconSize: 20,
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.grey,
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15, left: 15),
+                    child: IconButtonWidget(
+                        iconSize: 20,
+                        padding: EdgeInsets.zero,
+                        icon: const Icon(
+                          Icons.more_horiz,
+                          color: Colors.grey,
+                        )),
+                  )
+                ],
+                backgroundColor: Colors.grey[300],
+              ),
+              backgroundColor: Colors.grey[300],
+              body: Stack(
                 alignment: Alignment.center,
                 children: [
                   Padding(
@@ -104,11 +111,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         controller: _tabController,
                       ))
                 ],
-              );
-            },
-          );
-        },
-      ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
