@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:scorn_clone/widget/amount_plan_widget.dart';
+import 'package:scorn_clone/widget/amount_title_row.dart';
 
 import '../entity/plan_data_entity.dart';
-import 'amount_title_container.dart';
+import 'amount_title_column.dart';
 
 class SummaryInfoBottomSheet extends StatelessWidget {
   SummaryInfoBottomSheet({
@@ -25,6 +27,7 @@ class SummaryInfoBottomSheet extends StatelessWidget {
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Center(
             child: Container(
@@ -63,20 +66,45 @@ class SummaryInfoBottomSheet extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                  child: AmountTitleContainer(
+                  child: AmountTitleColumn(
                 title: "총 소비",
                 amount: totalConsumption,
                 padding: const EdgeInsets.only(right: 8),
               )),
               Expanded(
-                  child: AmountTitleContainer(
+                  child: AmountTitleColumn(
                 title: "총 수입",
                 amount: totalIncome,
                 amountColor: const Color(0xFF00B75F),
                 padding: const EdgeInsets.only(left: 8),
               )),
             ],
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 25),
+            child: AmountTitleRow(
+              title: "남은 총 예산",
+              amount: 80,
+              totalAmount: 100,
+            ),
+          ),
+          Text("플랜별 소비",
+              style: const TextStyle(
+                color: Color(0xFF757575),
+                fontFamily: 'PretendardRegular',
+              )),
+          AmountPlanWidget(
+              emoji: "\u{2708}",
+              planName: "당근",
+              amount: 1000,
+              totalAmount: 15000,
+              isIncome: true),
+          AmountPlanWidget(
+              emoji: "\u{1f64f}",
+              planName: "저녁",
+              amount: 30000,
+              totalAmount: 450000,
+              isIncome: false),
         ],
       ),
     );

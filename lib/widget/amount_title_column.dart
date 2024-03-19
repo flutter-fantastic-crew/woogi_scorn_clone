@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../util/number_util.dart';
 
-class AmountTitleContainer extends StatelessWidget {
-  AmountTitleContainer({
+class AmountTitleColumn extends StatelessWidget {
+  AmountTitleColumn({
     super.key,
     required this.title,
     required this.amount,
