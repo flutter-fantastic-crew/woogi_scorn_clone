@@ -44,14 +44,18 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   onTap: () {
                     showModalBottomSheet(
                         context: context,
-                        scrollControlDisabledMaxHeightRatio: 0.88,
+                        isScrollControlled: true,
+                        // scrollControlDisabledMaxHeightRatio: 0.88,
                         builder: (_) {
-                          return SummaryInfoBottomSheet(
-                            totalConsumption: context
-                                .read<HomePageViewModel>()
-                                .totalConsumption,
-                            totalIncome:
-                                context.read<HomePageViewModel>().totalIncome,
+                          return FractionallySizedBox(
+                            heightFactor: 0.88,
+                            child: SummaryInfoBottomSheet(
+                              totalConsumption: context
+                                  .read<HomePageViewModel>()
+                                  .totalConsumption,
+                              totalIncome:
+                                  context.read<HomePageViewModel>().totalIncome,
+                            ),
                           );
                         });
                   },

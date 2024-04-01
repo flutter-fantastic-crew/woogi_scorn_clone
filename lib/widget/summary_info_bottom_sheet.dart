@@ -88,23 +88,36 @@ class SummaryInfoBottomSheet extends StatelessWidget {
               totalAmount: 100,
             ),
           ),
-          Text("플랜별 소비",
-              style: const TextStyle(
+          const Text("플랜별 소비",
+              style: TextStyle(
                 color: Color(0xFF757575),
                 fontFamily: 'PretendardRegular',
               )),
-          AmountPlanWidget(
-              emoji: "\u{2708}",
-              planName: "당근",
-              amount: 1000,
-              totalAmount: 15000,
-              isIncome: true),
-          AmountPlanWidget(
-              emoji: "\u{1f64f}",
-              planName: "저녁",
-              amount: 30000,
-              totalAmount: 450000,
-              isIncome: false),
+          Expanded(
+            child: Scrollbar(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      AmountPlanWidget(
+                          emoji: "\u{2708}",
+                          planName: "당근",
+                          amount: 1000,
+                          totalAmount: 15000,
+                          isIncome: true),
+                      AmountPlanWidget(
+                          emoji: "\u{1f64f}",
+                          planName: "저녁",
+                          amount: 30000,
+                          totalAmount: 450000,
+                          isIncome: false),
+                    ],
+                  );
+                },
+              ),
+            ),
+          )
         ],
       ),
     );
