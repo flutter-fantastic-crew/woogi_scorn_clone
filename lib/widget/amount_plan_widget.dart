@@ -5,18 +5,18 @@ import '../util/number_util.dart';
 class AmountPlanWidget extends StatelessWidget {
   AmountPlanWidget({
     super.key,
-    required this.emoji,
+    required this.planIcon,
     required this.planName,
     required this.amount,
     required this.totalAmount,
-    required this.isIncome,
+    required this.budget,
   });
 
-  String emoji = "\u{1f60e}";
+  String planIcon = "\u{1f60e}";
   String planName;
   int amount;
   int totalAmount;
-  bool isIncome;
+  int? budget;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class AmountPlanWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: const Color(0xFFEEEEEE), shape: BoxShape.circle),
-                  child: Text(emoji, style: TextStyle(fontSize: 15)),
+                  child: Text(planIcon, style: TextStyle(fontSize: 15)),
                 ),
               ),
               Column(
@@ -57,14 +57,15 @@ class AmountPlanWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              Text("${thousandWon(amount)}원",
+              Text(
+                  "${budget == null ? thousandWon(amount) : thousandWon(budget! - amount)}원",
                   style: TextStyle(
-                    color: isIncome ? Colors.green : Colors.black,
+                    color: budget == null ? Colors.green : Colors.black,
                     fontFamily: 'PretendardRegular',
                   )),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text(isIncome ? "수입" : "남음",
+                child: Text(budget == null ? "수입" : "남음",
                     style: const TextStyle(
                       color: Color(0xFF757575),
                       fontFamily: 'PretendardRegular',

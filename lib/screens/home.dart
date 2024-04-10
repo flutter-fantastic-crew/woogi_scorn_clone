@@ -55,6 +55,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   .totalConsumption,
                               totalIncome:
                                   context.read<HomePageViewModel>().totalIncome,
+                              planList: context.read<HomePageViewModel>().plans,
                             ),
                           );
                         });

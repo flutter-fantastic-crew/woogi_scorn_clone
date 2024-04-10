@@ -10,10 +10,12 @@ class SummaryInfoBottomSheet extends StatelessWidget {
     super.key,
     required this.totalIncome,
     required this.totalConsumption,
+    required this.planList,
   });
 
   int totalIncome;
   int totalConsumption;
+  final List<PlanDataEntity> planList;
 
   @override
   Widget build(BuildContext context) {
@@ -96,23 +98,14 @@ class SummaryInfoBottomSheet extends StatelessWidget {
           Expanded(
             child: Scrollbar(
               child: ListView.builder(
-                itemCount: 5,
+                itemCount: planList.length,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      AmountPlanWidget(
-                          emoji: "\u{2708}",
-                          planName: "당근",
-                          amount: 1000,
-                          totalAmount: 15000,
-                          isIncome: true),
-                      AmountPlanWidget(
-                          emoji: "\u{1f64f}",
-                          planName: "저녁",
-                          amount: 30000,
-                          totalAmount: 450000,
-                          isIncome: false),
-                    ],
+                  return AmountPlanWidget(
+                    planIcon: planList[index].planIcon,
+                    planName: planList[index].planName,
+                    amount: planList[index].totalExpenses,
+                    totalAmount: 15000,
+                    budget: planList[index].budget,
                   );
                 },
               ),
