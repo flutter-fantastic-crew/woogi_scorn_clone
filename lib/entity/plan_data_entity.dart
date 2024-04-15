@@ -9,7 +9,7 @@ class PlanDataEntity {
   String planName; // 플랜 이름
   String planIcon; // 플랜 아이콘
   List<PlanHistoryEntity> planHistory; // 플랜예산 기록 리스트
-  int? budget; // null == 수입
+  int? budget; // null == 수입, 예산
 
   PlanDataEntity({
     required this.planId,

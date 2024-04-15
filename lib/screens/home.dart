@@ -106,7 +106,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       controller: _tabController,
                       children: List<Widget>.generate(
                           homePageViewModel.plans.length,
-                          (index) => PlanCardWidget()),
+                          (index) => PlanCardWidget(
+                                plan: homePageViewModel.plans[index],
+                              )),
                     ),
                   ),
                   Positioned(
