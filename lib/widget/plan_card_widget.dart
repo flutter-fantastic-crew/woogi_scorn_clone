@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:scorn_clone/widget/pie_chart.dart';
 
 import '../entity/plan_data_entity.dart';
@@ -45,7 +46,9 @@ class PlanCardWidget extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/planHistory');
+                    },
                     child: Text("내역 추가",
                         style: TextStyle(
                             fontSize: 18, fontFamily: 'PretendardBold')),
