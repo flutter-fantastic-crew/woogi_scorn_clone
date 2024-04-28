@@ -97,26 +97,32 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 backgroundColor: Colors.grey[300],
               ),
               backgroundColor: Colors.grey[300],
-              body: Stack(
-                alignment: Alignment.center,
+              body: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 40),
-                    child: TabBarView(
-                      controller: _tabController,
-                      children: List<Widget>.generate(
-                          homePageViewModel.plans.length,
-                          (index) => PlanCardWidget(
-                                plan: homePageViewModel.plans[index],
-                              )),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: List<Widget>.generate(
+                            homePageViewModel.plans.length,
+                            (index) => PlanCardWidget(
+                                  plan: homePageViewModel.plans[index],
+                                )),
+                      ),
                     ),
                   ),
-                  Positioned(
-                      bottom: 20,
-                      child: TabPageSelector(
-                        color: Colors.black26,
-                        controller: _tabController,
-                      ))
+                  SizedBox(
+                    height: 20,
+                    child: TabPageSelector(
+                      color: Colors.black26,
+                      controller: _tabController,
+                      indicatorSize: 8,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  )
                 ],
               ),
             );

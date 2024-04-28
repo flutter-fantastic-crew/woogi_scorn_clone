@@ -9,7 +9,7 @@ class HomePageViewModel with ChangeNotifier {
     PlanDataEntity(
         planId: 0,
         planStartDate: DateTime.now(),
-        planEndDate: DateTime.now(),
+        planEndDate: DateTime.now().add(Duration(days: 15)),
         planMemo: "메모1",
         planName: "당근 옷 팔기",
         planIcon: getEmoji,
@@ -17,20 +17,20 @@ class HomePageViewModel with ChangeNotifier {
           PlanHistoryEntity(
             planHistoryId: 0,
             memo: "티셔츠",
-            createAt: DateTime.now(),
+            createAt: DateTime.now().add(Duration(days: 13)),
             expenses: 3000,
           ),
           PlanHistoryEntity(
             planHistoryId: 1,
             memo: "니트",
-            createAt: DateTime.now(),
+            createAt: DateTime.now().add(Duration(days: 4)),
             expenses: 5000,
           )
         ]),
     PlanDataEntity(
         planId: 0,
         planStartDate: DateTime.now(),
-        planEndDate: DateTime.now(),
+        planEndDate: DateTime.now().add(Duration(days: 31)),
         planMemo: "메모2",
         planName: "야식",
         planIcon: getEmoji,
@@ -39,13 +39,13 @@ class HomePageViewModel with ChangeNotifier {
           PlanHistoryEntity(
             planHistoryId: 0,
             memo: "어묵",
-            createAt: DateTime.now(),
+            createAt: DateTime.now().add(Duration(days: 1)),
             expenses: 500,
           ),
           PlanHistoryEntity(
             planHistoryId: 1,
             memo: "떡볶이",
-            createAt: DateTime.now(),
+            createAt: DateTime.now().add(Duration(days: 2)),
             expenses: 1000,
           )
         ])
