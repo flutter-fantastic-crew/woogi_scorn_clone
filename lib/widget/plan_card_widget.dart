@@ -33,7 +33,7 @@ class PlanCardWidget extends StatelessWidget {
                 : PlanTypeCircularIndicator(plan: plan),
             ElevatedButton(
               onPressed: () {
-                context.go('/planHistory');
+                context.push('/planHistory');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent,

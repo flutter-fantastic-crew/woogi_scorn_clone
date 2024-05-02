@@ -15,9 +15,8 @@ void main() {
         routes: <RouteBase>[
           GoRoute(
             path: 'planHistory',
-            builder: (BuildContext context, GoRouterState state) {
-              return const PlanHistoryPage();
-            },
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                const MaterialPage(child: PlanHistoryPage()),
           ),
         ],
       ),
