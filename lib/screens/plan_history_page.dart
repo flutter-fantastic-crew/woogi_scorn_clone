@@ -49,8 +49,13 @@ class _PlanHistoryPageState extends State<PlanHistoryPage> {
                     children: [
                       RowTextField(widgetList: [
                         IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () {},
+                          icon: Icon(
+                              context.read<PlanHistoryPageViewModel>().isPlus
+                                  ? Icons.add
+                                  : Icons.remove),
+                          onPressed: () => context
+                              .read<PlanHistoryPageViewModel>()
+                              .changePlus(),
                         ),
                         Expanded(
                           child: TextField(

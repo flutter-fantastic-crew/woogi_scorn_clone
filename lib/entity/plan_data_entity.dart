@@ -25,5 +25,5 @@ class PlanDataEntity {
   int get totalExpenses =>
       planHistory.map((e) => e.expenses).reduce((sum, value) => sum + value);
 
-  int get remainAmount => (budget ?? 0) - totalExpenses;
+  int get remainAmount => (budget ?? 0) + totalExpenses;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scorn_clone/entity/plan_history_entity.dart';
 
 class PlanHistoryPageViewModel with ChangeNotifier {
+  bool isPlus = true;
   int expenses = 0;
   TextEditingController memoTextController = TextEditingController();
   DateTime paidDatetime = DateTime.now();
@@ -16,6 +17,11 @@ class PlanHistoryPageViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void changePlus() {
+    isPlus = !isPlus;
+    notifyListeners();
+  }
+
   bool get enableSaveButton {
     return expenses != 0;
   }
@@ -24,7 +30,7 @@ class PlanHistoryPageViewModel with ChangeNotifier {
     //todo :: id 생성 방식
     return PlanHistoryEntity(
         planHistoryId: -1,
-        expenses: expenses,
+        expenses: isPlus ? expenses : expenses * -1,
         memo: memoTextController.text,
         createAt: paidDatetime);
   }

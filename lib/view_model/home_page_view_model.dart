@@ -40,13 +40,13 @@ class HomePageViewModel with ChangeNotifier {
             planHistoryId: 0,
             memo: "어묵",
             createAt: DateTime.now().add(Duration(days: 1)),
-            expenses: 500,
+            expenses: -500,
           ),
           PlanHistoryEntity(
             planHistoryId: 1,
             memo: "떡볶이",
             createAt: DateTime.now().add(Duration(days: 2)),
-            expenses: 1000,
+            expenses: -1000,
           )
         ])
   ];
