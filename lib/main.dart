@@ -16,7 +16,7 @@ void main() {
           GoRoute(
             path: 'planHistory',
             pageBuilder: (BuildContext context, GoRouterState state) =>
-                const MaterialPage(child: PlanHistoryPage()),
+                MaterialPage(child: PlanHistoryPage()),
           ),
         ],
       ),

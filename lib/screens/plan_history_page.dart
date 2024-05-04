@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scorn_clone/widget/row_text_field.dart';
+import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
+import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
+import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 import '../view_model/home_page_view_model.dart';
 import '../widget/custom_appbar.dart';
 
-class PlanHistoryPage extends StatelessWidget {
-  const PlanHistoryPage({super.key});
+class PlanHistoryPage extends StatefulWidget {
+  PlanHistoryPage({super.key});
+
+  @override
+  State<PlanHistoryPage> createState() => _PlanHistoryPageState();
+}
+
+class _PlanHistoryPageState extends State<PlanHistoryPage> {
+  final calendarController = CleanCalendarController(
+    minDate: DateTime.now(),
+    maxDate: DateTime.now().add(const Duration(days: 365)),
+    rangeMode: false,
+    onDayTapped: (date) {
+      // setState(() {
+      //   test = date.toString();
+      // });
+      print(date);
+    },
+    weekdayStart: DateTime.monday,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +91,24 @@ class PlanHistoryPage extends StatelessWidget {
                     child: Icon(Icons.calendar_month),
                   ),
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: DateTime.now().toString(),
-                        border: InputBorder.none,
-                      ),
+                    child: GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            // scrollControlDisabledMaxHeightRatio: 0.88,
+                            builder: (_) {
+                              return FractionallySizedBox(
+                                heightFactor: 0.5,
+                                child: ScrollableCleanCalendar(
+                                  calendarController: calendarController,
+                                  layout: Layout.BEAUTY,
+                                  calendarCrossAxisSpacing: 0,
+                                ),
+                              );
+                            });
+                      },
+                      child: Text("Today"),
                     ),
                   ),
                 ]),
