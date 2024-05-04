@@ -28,7 +28,7 @@ class HomePageViewModel with ChangeNotifier {
           )
         ]),
     PlanDataEntity(
-        planId: 0,
+        planId: 1,
         planStartDate: DateTime.now(),
         planEndDate: DateTime.now().add(Duration(days: 31)),
         planMemo: "메모2",
@@ -66,6 +66,15 @@ class HomePageViewModel with ChangeNotifier {
   void addPlan(PlanDataEntity plan) {
     _plans.add(plan);
     notifyListeners();
+  }
+
+  void addPlanHistoryByPlanId(
+      {required PlanHistoryEntity planHistory, required int planId}) {
+    for (var plan in _plans) {
+      if (plan.planId == planId) {
+        plan.planHistory.add(planHistory);
+      }
+    }
   }
 }
 

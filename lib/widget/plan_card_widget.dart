@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:scorn_clone/entity/plan_history_entity.dart';
+import 'package:scorn_clone/view_model/home_page_view_model.dart';
 import 'package:scorn_clone/widget/pie_chart.dart';
 import 'package:scorn_clone/widget/plan_type_circular_indicator.dart';
 
@@ -33,7 +36,12 @@ class PlanCardWidget extends StatelessWidget {
                 : PlanTypeCircularIndicator(plan: plan),
             ElevatedButton(
               onPressed: () {
-                context.push('/planHistory');
+                context.push('/planHistory').then((value) {
+                  if (value != null && value is PlanHistoryEntity) {
+                    context.read<HomePageViewModel>().addPlanHistoryByPlanId(
+                        planHistory: value, planId: plan.planId);
+                  }
+                });
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent,
