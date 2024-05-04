@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scorn_clone/entity/plan_history_entity.dart';
 
 class PlanHistoryPageViewModel with ChangeNotifier {
-  TextEditingController expensesTextController = TextEditingController();
+  int expenses = 0;
   TextEditingController memoTextController = TextEditingController();
   DateTime paidDatetime = DateTime.now();
 
@@ -11,16 +11,20 @@ class PlanHistoryPageViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void changeExpenses(String expenses) {
+    this.expenses = int.parse(expenses.replaceAll(",", "").substring(1));
+    notifyListeners();
+  }
+
   bool get enableSaveButton {
-    return expensesTextController.text != "";
+    return expenses != 0;
   }
 
   PlanHistoryEntity get getPlanHistoryEntity {
     //todo :: id 생성 방식
     return PlanHistoryEntity(
         planHistoryId: -1,
-        expenses: int.parse(
-            expensesTextController.text.replaceAll(",", "").substring(1)),
+        expenses: expenses,
         memo: memoTextController.text,
         createAt: paidDatetime);
   }

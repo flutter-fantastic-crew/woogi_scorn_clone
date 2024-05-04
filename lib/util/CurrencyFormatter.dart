@@ -7,11 +7,7 @@ class CurrencyFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.selection.baseOffset == 0) {
-      return newValue;
-    }
-
-    final int parsedValue = int.parse(newValue.text);
+    int parsedValue = int.tryParse(newValue.text) ?? 0;
     final formatter = NumberFormat.simpleCurrency(locale: "ko");
     return TextEditingValue(text: formatter.format(parsedValue));
   }

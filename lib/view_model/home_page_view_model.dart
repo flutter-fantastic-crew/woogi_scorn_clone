@@ -73,8 +73,10 @@ class HomePageViewModel with ChangeNotifier {
     for (var plan in _plans) {
       if (plan.planId == planId) {
         plan.planHistory.add(planHistory);
+        break;
       }
     }
+    notifyListeners();
   }
 }
 

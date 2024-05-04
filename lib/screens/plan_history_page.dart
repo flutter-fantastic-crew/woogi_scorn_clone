@@ -62,9 +62,11 @@ class _PlanHistoryPageState extends State<PlanHistoryPage> {
                               FilteringTextInputFormatter.digitsOnly,
                               CurrencyFormatter(),
                             ],
-                            controller: context
-                                .watch<PlanHistoryPageViewModel>()
-                                .expensesTextController,
+                            onChanged: (value) {
+                              context
+                                  .read<PlanHistoryPageViewModel>()
+                                  .changeExpenses(value);
+                            },
                           ),
                         ),
                         SizedBox(
