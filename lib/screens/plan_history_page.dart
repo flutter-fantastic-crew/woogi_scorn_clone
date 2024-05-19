@@ -13,6 +13,7 @@ import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 import '../view_model/home_page_view_model.dart';
 import '../widget/custom_appbar.dart';
+import '../widget/emoji_modal.dart';
 
 class PlanHistoryPage extends StatefulWidget {
   PlanHistoryPage({super.key});
@@ -91,7 +92,27 @@ class _PlanHistoryPageState extends State<PlanHistoryPage> {
                           Padding(
                             padding: const EdgeInsets.only(left: 20, right: 10),
                             child: GestureDetector(
-                              child: Text(getEmoji),
+                              onTap: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    // scrollControlDisabledMaxHeightRatio: 0.88,
+                                    builder: (_) {
+                                      return FractionallySizedBox(
+                                        heightFactor: 0.5,
+                                        child: EmojiModal(),
+                                      );
+                                    }).then((value) {
+                                  if (value != null) {
+                                    context
+                                        .read<PlanHistoryPageViewModel>()
+                                        .changeEmoji(value);
+                                  }
+                                });
+                              },
+                              child: Text(context
+                                  .watch<PlanHistoryPageViewModel>()
+                                  .emoji),
                             ),
                           ),
                           Expanded(

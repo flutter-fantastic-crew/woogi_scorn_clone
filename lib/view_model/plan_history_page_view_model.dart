@@ -6,6 +6,7 @@ class PlanHistoryPageViewModel with ChangeNotifier {
   int expenses = 0;
   TextEditingController memoTextController = TextEditingController();
   DateTime paidDatetime = DateTime.now();
+  String emoji = "\u{1F313}";
 
   void changePaidDatetime(DateTime dateTime) {
     paidDatetime = dateTime;
@@ -14,6 +15,11 @@ class PlanHistoryPageViewModel with ChangeNotifier {
 
   void changeExpenses(String expenses) {
     this.expenses = int.parse(expenses.replaceAll(",", "").substring(1));
+    notifyListeners();
+  }
+
+  void changeEmoji(String emoji) {
+    this.emoji = emoji;
     notifyListeners();
   }
 
