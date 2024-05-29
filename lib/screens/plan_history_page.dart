@@ -1,6 +1,8 @@
+import 'dart:math';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:scorn_clone/util/CurrencyFormatter.dart';
@@ -11,7 +13,6 @@ import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
-import '../view_model/home_page_view_model.dart';
 import '../widget/custom_appbar.dart';
 import '../widget/emoji_modal.dart';
 
@@ -24,10 +25,13 @@ class PlanHistoryPage extends StatefulWidget {
 
 class _PlanHistoryPageState extends State<PlanHistoryPage> {
   @override
-  void initState() {
+  Future<void> initState() async {
     // TODO: implement initState
     super.initState();
     initializeDateFormatting();
+    context.read<PlanHistoryPageViewModel>().changeEmoji(defaultEmojiSet[2]
+        .emoji[Random().nextInt(defaultEmojiSet[2].emoji.length)]
+        .emoji);
   }
 
   @override

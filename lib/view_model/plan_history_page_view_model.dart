@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scorn_clone/entity/plan_history_entity.dart';
 
@@ -6,7 +9,7 @@ class PlanHistoryPageViewModel with ChangeNotifier {
   int expenses = 0;
   TextEditingController memoTextController = TextEditingController();
   DateTime paidDatetime = DateTime.now();
-  String emoji = "\u{1F313}";
+  String emoji = "";
 
   void changePaidDatetime(DateTime dateTime) {
     paidDatetime = dateTime;
