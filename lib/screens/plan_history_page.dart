@@ -16,28 +16,17 @@ import 'package:scrollable_clean_calendar/utils/enums.dart';
 import '../widget/custom_appbar.dart';
 import '../widget/emoji_modal.dart';
 
-class PlanHistoryPage extends StatefulWidget {
+class PlanHistoryPage extends StatelessWidget {
   PlanHistoryPage({super.key});
 
   @override
-  State<PlanHistoryPage> createState() => _PlanHistoryPageState();
-}
-
-class _PlanHistoryPageState extends State<PlanHistoryPage> {
-  @override
-  Future<void> initState() async {
-    // TODO: implement initState
-    super.initState();
-    initializeDateFormatting();
-    context.read<PlanHistoryPageViewModel>().changeEmoji(defaultEmojiSet[2]
-        .emoji[Random().nextInt(defaultEmojiSet[2].emoji.length)]
-        .emoji);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    initializeDateFormatting();
     return ChangeNotifierProvider<PlanHistoryPageViewModel>(
-        create: (_) => PlanHistoryPageViewModel(),
+        create: (_) => PlanHistoryPageViewModel()
+          ..changeEmoji(defaultEmojiSet[2]
+              .emoji[Random().nextInt(defaultEmojiSet[2].emoji.length)]
+              .emoji),
         builder: (context, child) {
           return Scaffold(
             appBar: CustomAppbar(
