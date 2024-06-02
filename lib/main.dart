@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scorn_clone/screens/emofi.dart';
 import 'package:scorn_clone/screens/home.dart';
+import 'package:scorn_clone/screens/plan_addition_page.dart';
 import 'package:scorn_clone/screens/plan_history_page.dart';
 
 void main() {
@@ -23,6 +24,11 @@ void main() {
             path: 'emoji',
             pageBuilder: (BuildContext context, GoRouterState state) =>
                 MaterialPage(child: Emoji()),
+          ),
+          GoRoute(
+            path: 'planAddition',
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                MaterialPage(child: PlanAdditionPage()),
           ),
         ],
       ),
