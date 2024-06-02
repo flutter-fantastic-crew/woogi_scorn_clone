@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:scorn_clone/widget/summary_info_bottom_sheet.dart';
 
@@ -51,12 +52,16 @@ class CustomAppbar extends AppBar {
           ),
           actions: [
             IconButtonWidget(
-                iconSize: 20,
-                padding: EdgeInsets.zero,
-                icon: const Icon(
-                  Icons.add,
-                  color: Colors.grey,
-                )),
+              iconSize: 20,
+              padding: EdgeInsets.zero,
+              icon: const Icon(
+                Icons.add,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                context.push("/planAddition");
+              },
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 15, left: 15),
               child: IconButtonWidget(
