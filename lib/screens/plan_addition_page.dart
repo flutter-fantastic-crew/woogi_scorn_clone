@@ -9,10 +9,26 @@ import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 import '../util/CurrencyFormatter.dart';
+import '../widget/plan_addition_page/range_calendar_bottom_sheet.dart';
 import '../widget/row_text_field.dart';
 
-class PlanAdditionPage extends StatelessWidget {
+class PlanAdditionPage extends StatefulWidget {
   const PlanAdditionPage({super.key});
+
+  @override
+  State<PlanAdditionPage> createState() => _PlanAdditionPageState();
+}
+
+class _PlanAdditionPageState extends State<PlanAdditionPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(Duration(milliseconds: 200))
+          .then((value) => showRangeCalendarBottomSheet(context));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,86 +80,7 @@ class PlanAdditionPage extends StatelessWidget {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    scrollControlDisabledMaxHeightRatio: 0.88,
-                                    builder: (_) {
-                                      return SingleChildScrollView(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            SizedBox(
-                                              height: 400,
-                                              child: ScrollableCleanCalendar(
-                                                calendarController:
-                                                    CleanCalendarController(
-                                                  minDate: DateTime.now(),
-                                                  maxDate: DateTime.now().add(
-                                                      const Duration(
-                                                          days: 365)),
-                                                  weekdayStart: DateTime.monday,
-                                                ),
-                                                layout: Layout.BEAUTY,
-                                                calendarCrossAxisSpacing: 0,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 100,
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: GestureDetector(
-                                                      child: Text("오늘로 이동",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontFamily:
-                                                                  'PretendardRegular',
-                                                              color: Colors
-                                                                  .grey[500],
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .underline)),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: ElevatedButton(
-                                                      onPressed: null,
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor:
-                                                            Colors.blueAccent,
-                                                        foregroundColor:
-                                                            Colors.white,
-                                                        disabledBackgroundColor:
-                                                            Colors.blueAccent[
-                                                                100],
-                                                        minimumSize:
-                                                            Size(700, 50),
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12)),
-                                                      ),
-                                                      child: const Text("선택",
-                                                          style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontFamily:
-                                                                'PretendardBold',
-                                                            color: Colors.white,
-                                                          )),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    });
+                                showRangeCalendarBottomSheet(context);
                               },
                               child: const Text("오늘"),
                             ),
