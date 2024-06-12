@@ -28,6 +28,13 @@ class _RangeCalendarBottomSheetState extends State<RangeCalendarBottomSheet> {
                 minDate: DateTime.now().subtract(const Duration(days: 100)),
                 maxDate: DateTime.now().add(const Duration(days: 365)),
                 weekdayStart: DateTime.monday,
+                onRangeSelected: (DateTime startDate, DateTime? endDate) {
+                  if (endDate != null) {
+                    this.startDate = startDate;
+                    this.endDate = endDate;
+                    // setState(() {});
+                  }
+                },
               ),
               layout: Layout.BEAUTY,
               calendarCrossAxisSpacing: 0,
