@@ -3,8 +3,17 @@ import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
-class RangeCalendarBottomSheet extends StatelessWidget {
-  const RangeCalendarBottomSheet({super.key});
+class RangeCalendarBottomSheet extends StatefulWidget {
+  RangeCalendarBottomSheet({super.key});
+
+  @override
+  State<RangeCalendarBottomSheet> createState() =>
+      _RangeCalendarBottomSheetState();
+}
+
+class _RangeCalendarBottomSheetState extends State<RangeCalendarBottomSheet> {
+  DateTime? startDate;
+  DateTime? endDate;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +25,7 @@ class RangeCalendarBottomSheet extends StatelessWidget {
             height: 400,
             child: ScrollableCleanCalendar(
               calendarController: CleanCalendarController(
-                minDate: DateTime.now(),
+                minDate: DateTime.now().subtract(const Duration(days: 100)),
                 maxDate: DateTime.now().add(const Duration(days: 365)),
                 weekdayStart: DateTime.monday,
               ),
@@ -28,6 +37,7 @@ class RangeCalendarBottomSheet extends StatelessWidget {
             height: 100,
             child: Row(
               children: [
+                const SizedBox(width: 30),
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
@@ -42,7 +52,9 @@ class RangeCalendarBottomSheet extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: ElevatedButton(
-                    onPressed: null,
+                    onPressed: (startDate != null && endDate != null)
+                        ? () => ({startDate: startDate, endDate: endDate})
+                        : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueAccent,
                       foregroundColor: Colors.white,
@@ -59,6 +71,7 @@ class RangeCalendarBottomSheet extends StatelessWidget {
                         )),
                   ),
                 ),
+                const SizedBox(width: 30),
               ],
             ),
           )
@@ -68,7 +81,8 @@ class RangeCalendarBottomSheet extends StatelessWidget {
   }
 }
 
-Future<void> showRangeCalendarBottomSheet(BuildContext context) async {
+Future<({DateTime startDate, DateTime endDate})?> showRangeCalendarBottomSheet(
+    BuildContext context) async {
   return showModalBottomSheet(
       context: context,
       isScrollControlled: true,

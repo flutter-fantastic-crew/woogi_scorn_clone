@@ -80,7 +80,17 @@ class _PlanAdditionPageState extends State<PlanAdditionPage> {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                showRangeCalendarBottomSheet(context);
+                                showRangeCalendarBottomSheet(context)
+                                    .then((value) {
+                                  if (value != null) {
+                                    context
+                                        .read<PlanAdditionPageViewModel>()
+                                        .changeStartDate(value.startDate);
+                                    context
+                                        .read<PlanAdditionPageViewModel>()
+                                        .changeEndDate(value.endDate);
+                                  }
+                                });
                               },
                               child: const Text("오늘"),
                             ),
@@ -102,7 +112,9 @@ class _PlanAdditionPageState extends State<PlanAdditionPage> {
                               FilteringTextInputFormatter.digitsOnly,
                               CurrencyFormatter(),
                             ],
-                            onChanged: (value) {},
+                            controller: context
+                                .read<PlanAdditionPageViewModel>()
+                                .amountTextController,
                           ),
                         ),
                         SizedBox(
@@ -118,23 +130,29 @@ class _PlanAdditionPageState extends State<PlanAdditionPage> {
                       ]),
                     ],
                   ),
-                  ElevatedButton(
-                    onPressed: null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      foregroundColor: Colors.white,
-                      disabledBackgroundColor: Colors.blueAccent[100],
-                      minimumSize: Size(700, 50),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    child: const Text("다음",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'PretendardBold',
-                          color: Colors.white,
-                        )),
-                  ),
+                  Consumer<PlanAdditionPageViewModel>(builder:
+                      (BuildContext context,
+                          PlanAdditionPageViewModel viewModel, Widget? _) {
+                    return ElevatedButton(
+                      onPressed: viewModel.enableNextButton
+                          ? null
+                          : () => print("next page~"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        foregroundColor: Colors.white,
+                        disabledBackgroundColor: Colors.blueAccent[100],
+                        minimumSize: Size(700, 50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                      ),
+                      child: const Text("다음",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'PretendardBold',
+                            color: Colors.white,
+                          )),
+                    );
+                  }),
                 ],
               ),
             ),
