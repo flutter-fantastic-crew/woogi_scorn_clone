@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class PlanAdditionPageViewModel with ChangeNotifier {
   TextEditingController amountTextController = TextEditingController();
+  TextEditingController dateTextController = TextEditingController();
   DateTime? startDate;
   DateTime? endDate;
 
@@ -11,7 +12,13 @@ class PlanAdditionPageViewModel with ChangeNotifier {
   }
 
   void changeEndDate(DateTime dateTime) {
-    startDate = dateTime;
+    endDate = dateTime;
+    notifyListeners();
+  }
+
+  void changeDateText() {
+    // todo :: date text 포맷 맞춰서 넣어주기
+    dateTextController.text = "";
     notifyListeners();
   }
 

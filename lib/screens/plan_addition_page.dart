@@ -4,31 +4,13 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:scorn_clone/view_model/plan_addition_page_view_model.dart';
 import 'package:scorn_clone/widget/custom_appbar.dart';
-import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
-import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
-import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 import '../util/CurrencyFormatter.dart';
 import '../widget/plan_addition_page/range_calendar_bottom_sheet.dart';
 import '../widget/row_text_field.dart';
 
-class PlanAdditionPage extends StatefulWidget {
+class PlanAdditionPage extends StatelessWidget {
   const PlanAdditionPage({super.key});
-
-  @override
-  State<PlanAdditionPage> createState() => _PlanAdditionPageState();
-}
-
-class _PlanAdditionPageState extends State<PlanAdditionPage> {
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(Duration(milliseconds: 200))
-          .then((value) => showRangeCalendarBottomSheet(context));
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +18,11 @@ class _PlanAdditionPageState extends State<PlanAdditionPage> {
     return ChangeNotifierProvider(
       create: (_) => PlanAdditionPageViewModel(),
       builder: (context, child) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(const Duration(milliseconds: 200))
+              .then((value) => showRangeCalendarBottomSheet(context));
+        });
+
         return Scaffold(
           appBar: CustomAppbar(
             context: context,
@@ -92,7 +79,16 @@ class _PlanAdditionPageState extends State<PlanAdditionPage> {
                                   }
                                 });
                               },
-                              child: const Text("오늘"),
+                              child: TextField(
+                                enabled: false,
+                                decoration: const InputDecoration(
+                                  hintText: "기간",
+                                  border: InputBorder.none,
+                                ),
+                                controller: context
+                                    .read<PlanAdditionPageViewModel>()
+                                    .dateTextController,
+                              ),
                             ),
                           ),
                         ]),
