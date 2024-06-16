@@ -97,17 +97,3 @@ class RangeCalendarBottomSheet extends StatelessWidget {
         });
   }
 }
-
-Future<({DateTime startDate, DateTime endDate})?> showRangeCalendarBottomSheet(
-    BuildContext context) async {
-  return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      scrollControlDisabledMaxHeightRatio: 0.88,
-      builder: (_) {
-        return ChangeNotifierProvider<PlanAdditionPageViewModel>.value(
-          value: context.read<PlanAdditionPageViewModel>(),
-          child: RangeCalendarBottomSheet(),
-        );
-      });
-}

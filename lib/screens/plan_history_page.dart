@@ -162,7 +162,7 @@ class PlanHistoryPage extends StatelessWidget {
                               context
                                   .watch<PlanHistoryPageViewModel>()
                                   .paidDatetime
-                                  .convertKoreaDate,
+                                  .convertKoreaDateDay,
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontFamily: 'PretendardRegular',

@@ -67,30 +67,26 @@ class PlanAdditionPage extends StatelessWidget {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                showRangeCalendarBottomSheet(context)
-                                    .then((value) {
-                                  if (value != null) {
-                                    context
-                                        .read<PlanAdditionPageViewModel>()
-                                        .changeStartDate(value.startDate);
-                                    context
-                                        .read<PlanAdditionPageViewModel>()
-                                        .changeEndDate(value.endDate);
-                                  }
-                                });
+                                showRangeCalendarBottomSheet(context);
                               },
-                              child: TextField(
-                                enabled: false,
-                                decoration: const InputDecoration(
-                                  hintText: "기간",
-                                  border: InputBorder.none,
-                                ),
-                                controller: context
-                                    .read<PlanAdditionPageViewModel>()
-                                    .dateTextController,
+                              child: Consumer<PlanAdditionPageViewModel>(
+                                builder: (BuildContext context,
+                                    PlanAdditionPageViewModel viewModel,
+                                    Widget? _) {
+                                  return TextField(
+                                      enabled: false,
+                                      decoration: const InputDecoration(
+                                        hintText: "기간",
+                                        border: InputBorder.none,
+                                      ),
+                                      controller: viewModel
+                                          .dateTextController,
+                                      style: const TextStyle(
+                                          fontSize: 18, color: Colors.black));
+                                },
                               ),
                             ),
-                          ),
+                          )
                         ]),
                       ),
                       RowTextField(widgetList: [
@@ -100,18 +96,21 @@ class PlanAdditionPage extends StatelessWidget {
                         ),
                         Expanded(
                           child: TextField(
-                            decoration: const InputDecoration(
-                              hintText: "금액",
-                              border: InputBorder.none,
-                            ),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              CurrencyFormatter(),
-                            ],
-                            controller: context
-                                .read<PlanAdditionPageViewModel>()
-                                .amountTextController,
-                          ),
+                              decoration: const InputDecoration(
+                                hintText: "금액",
+                                border: InputBorder.none,
+                              ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                CurrencyFormatter(),
+                              ],
+                              onChanged: (value) {
+                                context
+                                    .read<PlanAdditionPageViewModel>()
+                                    .changeAmount(value);
+                              },
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.black)),
                         ),
                         SizedBox(
                           width: 30,
@@ -131,8 +130,8 @@ class PlanAdditionPage extends StatelessWidget {
                           PlanAdditionPageViewModel viewModel, Widget? _) {
                     return ElevatedButton(
                       onPressed: viewModel.enableNextButton
-                          ? null
-                          : () => print("next page~"),
+                          ? () => print("next page~")
+                          : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueAccent,
                         foregroundColor: Colors.white,
@@ -156,5 +155,25 @@ class PlanAdditionPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> showRangeCalendarBottomSheet(BuildContext context) async {
+    return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        scrollControlDisabledMaxHeightRatio: 0.88,
+        builder: (_) {
+          return ChangeNotifierProvider<PlanAdditionPageViewModel>.value(
+            value: context.read<PlanAdditionPageViewModel>(),
+            child: RangeCalendarBottomSheet(),
+          );
+        }).then((value) {
+      if (value != null) {
+        context
+            .read<PlanAdditionPageViewModel>()
+            .changeStartDate(value.startDate);
+        context.read<PlanAdditionPageViewModel>().changeEndDate(value.endDate);
+      }
+    });
   }
 }

@@ -2,7 +2,11 @@
 import 'package:intl/intl.dart';
 
 extension DateTimeExtension on DateTime {
-  String get convertKoreaDate {
+  String get convertKoreaDateDay {
     return "${DateFormat("MM월 dd일").format(this)} ${DateFormat('E', 'ko_KR').format(this)}";
+  }
+
+  String get convertKoreaDate {
+    return DateFormat("MM월 dd일").format(this);
   }
 }
