@@ -15,6 +15,7 @@ import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 import '../widget/custom_appbar.dart';
 import '../widget/emoji_modal.dart';
+import '../widget/plan_addition_page/range_calendar_widget.dart';
 
 class PlanHistoryPage extends StatelessWidget {
   PlanHistoryPage({super.key});
@@ -132,31 +133,20 @@ class PlanHistoryPage extends StatelessWidget {
                               showModalBottomSheet(
                                   context: context,
                                   isScrollControlled: true,
-                                  // scrollControlDisabledMaxHeightRatio: 0.88,
                                   builder: (_) {
                                     return FractionallySizedBox(
                                       heightFactor: 0.5,
-                                      child: ScrollableCleanCalendar(
-                                        calendarController:
-                                            CleanCalendarController(
-                                          minDate: DateTime.now(),
-                                          maxDate: DateTime.now()
-                                              .add(const Duration(days: 365)),
-                                          rangeMode: false,
-                                          onDayTapped: (date) {
-                                            context
-                                                .read<
-                                                    PlanHistoryPageViewModel>()
-                                                .changePaidDatetime(date);
-                                            Navigator.pop(_);
-                                          },
-                                          weekdayStart: DateTime.monday,
-                                        ),
-                                        layout: Layout.BEAUTY,
-                                        calendarCrossAxisSpacing: 0,
+                                      child: RangeCalendarWidget(
+                                        rangeMode: false,
                                       ),
                                     );
-                                  });
+                                  }).then((value) {
+                                if (value != null) {
+                                  context
+                                      .read<PlanHistoryPageViewModel>()
+                                      .changePaidDatetime(value.startDate);
+                                }
+                              });
                             },
                             child: Text(
                               context

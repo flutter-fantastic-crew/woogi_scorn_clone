@@ -4,9 +4,11 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:scorn_clone/view_model/plan_addition_page_view_model.dart';
 import 'package:scorn_clone/widget/custom_appbar.dart';
+import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
 
 import '../util/CurrencyFormatter.dart';
-import '../widget/plan_addition_page/range_calendar_bottom_sheet.dart';
+import '../view_model/range_calendar_view_model.dart';
+import '../widget/plan_addition_page/range_calendar_widget.dart';
 import '../widget/row_text_field.dart';
 
 class PlanAdditionPage extends StatelessWidget {
@@ -79,8 +81,7 @@ class PlanAdditionPage extends StatelessWidget {
                                         hintText: "기간",
                                         border: InputBorder.none,
                                       ),
-                                      controller: viewModel
-                                          .dateTextController,
+                                      controller: viewModel.dateTextController,
                                       style: const TextStyle(
                                           fontSize: 18, color: Colors.black));
                                 },
@@ -165,7 +166,7 @@ class PlanAdditionPage extends StatelessWidget {
         builder: (_) {
           return ChangeNotifierProvider<PlanAdditionPageViewModel>.value(
             value: context.read<PlanAdditionPageViewModel>(),
-            child: RangeCalendarBottomSheet(),
+            child: RangeCalendarWidget(rangeMode: true, showBottomButton: true),
           );
         }).then((value) {
       if (value != null) {
