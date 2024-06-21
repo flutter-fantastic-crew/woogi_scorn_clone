@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scorn_clone/screens/home.dart';
-import 'package:scorn_clone/screens/plan_addition_page.dart';
+import 'package:scorn_clone/screens/plan_detail_addition_page.dart';
 import 'package:scorn_clone/screens/plan_history_page.dart';
+import 'package:scorn_clone/screens/plan_naming_addition_page.dart';
 
 void main() {
   /// The route configuration.
@@ -20,9 +21,14 @@ void main() {
                 MaterialPage(child: PlanHistoryPage()),
           ),
           GoRoute(
-            path: 'planAddition',
+            path: 'planDetailAddition',
             pageBuilder: (BuildContext context, GoRouterState state) =>
-                MaterialPage(child: PlanAdditionPage()),
+                MaterialPage(child: PlanDetailAdditionPage()),
+          ),
+          GoRoute(
+            path: 'planNamingAddition',
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                MaterialPage(child: PlanNamingAdditionPage()),
           ),
         ],
       ),

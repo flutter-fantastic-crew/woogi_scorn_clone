@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:scorn_clone/view_model/plan_addition_page_view_model.dart';
@@ -11,8 +12,8 @@ import '../view_model/range_calendar_view_model.dart';
 import '../widget/plan_addition_page/range_calendar_widget.dart';
 import '../widget/row_text_field.dart';
 
-class PlanAdditionPage extends StatelessWidget {
-  const PlanAdditionPage({super.key});
+class PlanDetailAdditionPage extends StatelessWidget {
+  const PlanDetailAdditionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +132,14 @@ class PlanAdditionPage extends StatelessWidget {
                           PlanAdditionPageViewModel viewModel, Widget? _) {
                     return ElevatedButton(
                       onPressed: viewModel.enableNextButton
-                          ? () => print("next page~")
+                          ? () {
+                              ChangeNotifierProvider<
+                                  PlanAdditionPageViewModel>.value(
+                                value:
+                                    context.read<PlanAdditionPageViewModel>(),
+                                child: context.push("/planNamingAddition"),
+                              );
+                            }
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueAccent,

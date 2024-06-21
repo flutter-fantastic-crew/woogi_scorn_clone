@@ -59,7 +59,7 @@ class CustomAppbar extends AppBar {
                 color: Colors.grey,
               ),
               onPressed: () {
-                context.push("/planAddition");
+                context.push("/planDetailAddition");
               },
             ),
             Padding(
