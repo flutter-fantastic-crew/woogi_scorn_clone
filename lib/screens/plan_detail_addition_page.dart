@@ -132,14 +132,8 @@ class PlanDetailAdditionPage extends StatelessWidget {
                           PlanAdditionPageViewModel viewModel, Widget? _) {
                     return ElevatedButton(
                       onPressed: viewModel.enableNextButton
-                          ? () {
-                              ChangeNotifierProvider<
-                                  PlanAdditionPageViewModel>.value(
-                                value:
-                                    context.read<PlanAdditionPageViewModel>(),
-                                child: context.push("/planNamingAddition"),
-                              );
-                            }
+                          ? () => context.push("/planNamingAddition",
+                              extra: viewModel)
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueAccent,

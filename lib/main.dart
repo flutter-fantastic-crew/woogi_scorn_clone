@@ -4,6 +4,7 @@ import 'package:scorn_clone/screens/home.dart';
 import 'package:scorn_clone/screens/plan_detail_addition_page.dart';
 import 'package:scorn_clone/screens/plan_history_page.dart';
 import 'package:scorn_clone/screens/plan_naming_addition_page.dart';
+import 'package:scorn_clone/view_model/plan_addition_page_view_model.dart';
 
 void main() {
   /// The route configuration.
@@ -28,7 +29,10 @@ void main() {
           GoRoute(
             path: 'planNamingAddition',
             pageBuilder: (BuildContext context, GoRouterState state) =>
-                MaterialPage(child: PlanNamingAdditionPage()),
+                MaterialPage(
+                    child: PlanNamingAdditionPage(
+              viewModel: state.extra as PlanAdditionPageViewModel,
+            )),
           ),
         ],
       ),
