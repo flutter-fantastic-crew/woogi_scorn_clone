@@ -4,8 +4,8 @@ import 'package:scorn_clone/util/datetime_extension.dart';
 // notify 어디서 되는지 확인하기
 class PlanAdditionPageViewModel with ChangeNotifier {
   TextEditingController dateTextController = TextEditingController();
-  TextEditingController titleTextController = TextEditingController();
   TextEditingController contentTextController = TextEditingController();
+  String? title;
   int? amount;
   DateTime? startDate;
   DateTime? endDate;
@@ -27,6 +27,11 @@ class PlanAdditionPageViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void changeTitle(String title) {
+    this.title = title;
+    notifyListeners();
+  }
+
   void changeDateText() {
     if (startDate != null && endDate != null) {
       dateTextController.text =
@@ -38,18 +43,21 @@ class PlanAdditionPageViewModel with ChangeNotifier {
   }
 
   void initNamingPage() {
-    titleTextController.clear();
+    title = "";
     contentTextController.clear();
   }
 
-  bool get enableNextButton {
+  bool get enableNextButtonForDetail {
     return amount != null && startDate != null && endDate != null;
+  }
+
+  bool get enableNextButtonForNaming {
+    return (title ?? "") != "";
   }
 
   @override
   void dispose() {
     dateTextController.dispose();
-    titleTextController.dispose();
     contentTextController.dispose();
     super.dispose();
   }

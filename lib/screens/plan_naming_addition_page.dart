@@ -21,6 +21,14 @@ class PlanNamingAdditionPage extends StatefulWidget {
 }
 
 class _PlanNamingAdditionPageState extends State<PlanNamingAdditionPage> {
+  TextEditingController titleTextController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    titleTextController.text = widget.viewModel.title ?? "";
+  }
+
   @override
   void dispose() {
     widget.viewModel.initNamingPage();
@@ -76,9 +84,12 @@ class _PlanNamingAdditionPageState extends State<PlanNamingAdditionPage> {
                                       hintText: "플랜 이름",
                                       border: InputBorder.none,
                                     ),
-                                    controller: context
-                                        .read<PlanAdditionPageViewModel>()
-                                        .dateTextController,
+                                    controller: titleTextController,
+                                    onChanged: (value) {
+                                      context
+                                          .read<PlanAdditionPageViewModel>()
+                                          .changeAmount(value);
+                                    },
                                     style: const TextStyle(
                                         fontSize: 18, color: Colors.black)),
                               ),
@@ -109,7 +120,7 @@ class _PlanNamingAdditionPageState extends State<PlanNamingAdditionPage> {
                         (BuildContext context,
                             PlanAdditionPageViewModel viewModel, Widget? _) {
                       return ElevatedButton(
-                        onPressed: viewModel.enableNextButton
+                        onPressed: viewModel.enableNextButtonForNaming
                             ? () => print("next page~")
                             : null,
                         style: ElevatedButton.styleFrom(

@@ -131,7 +131,7 @@ class PlanDetailAdditionPage extends StatelessWidget {
                       (BuildContext context,
                           PlanAdditionPageViewModel viewModel, Widget? _) {
                     return ElevatedButton(
-                      onPressed: viewModel.enableNextButton
+                      onPressed: viewModel.enableNextButtonForDetail
                           ? () => context.push("/planNamingAddition",
                               extra: viewModel)
                           : null,
