@@ -1,5 +1,10 @@
+import 'dart:math';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scorn_clone/util/datetime_extension.dart';
+
+import '../entity/plan_data_entity.dart';
 
 // notify 어디서 되는지 확인하기
 class PlanAdditionPageViewModel with ChangeNotifier {
@@ -53,6 +58,20 @@ class PlanAdditionPageViewModel with ChangeNotifier {
 
   bool get enableNextButtonForNaming {
     return (title ?? "") != "";
+  }
+
+  PlanDataEntity get getPlanDataEntity {
+    //todo :: id 생성 방식
+    return PlanDataEntity(
+        planId: -1,
+        planStartDate: startDate ?? DateTime.now(),
+        planEndDate: endDate ?? DateTime.now(),
+        planMemo: contentTextController.text,
+        planName: title ?? "",
+        planIcon: defaultEmojiSet[2]
+            .emoji[Random().nextInt(defaultEmojiSet[2].emoji.length)]
+            .emoji,
+        planHistory: []);
   }
 
   @override
