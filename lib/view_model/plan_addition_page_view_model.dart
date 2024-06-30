@@ -35,7 +35,7 @@ class PlanAdditionPageViewModel with ChangeNotifier {
   void changeDateText() {
     if (startDate != null && endDate != null) {
       dateTextController.text =
-          "${startDate!.convertKoreaDate} : ${endDate!.convertKoreaDate}";
+          "${startDate!.convertKoreaDate} ~ ${endDate!.convertKoreaDate}";
     } else {
       dateTextController.text = "";
     }

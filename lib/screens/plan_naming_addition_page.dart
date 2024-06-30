@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:scorn_clone/view_model/plan_addition_page_view_model.dart';
@@ -32,6 +33,7 @@ class _PlanNamingAdditionPageState extends State<PlanNamingAdditionPage> {
   @override
   void dispose() {
     widget.viewModel.initNamingPage();
+    titleTextController.dispose();
     super.dispose();
   }
 
@@ -76,23 +78,19 @@ class _PlanNamingAdditionPageState extends State<PlanNamingAdditionPage> {
                               child: Icon(Icons.sticky_note_2_outlined),
                             ),
                             Expanded(
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: TextField(
-                                    enabled: false,
-                                    decoration: const InputDecoration(
-                                      hintText: "플랜 이름",
-                                      border: InputBorder.none,
-                                    ),
-                                    controller: titleTextController,
-                                    onChanged: (value) {
-                                      context
-                                          .read<PlanAdditionPageViewModel>()
-                                          .changeAmount(value);
-                                    },
-                                    style: const TextStyle(
-                                        fontSize: 18, color: Colors.black)),
-                              ),
+                              child: TextField(
+                                  decoration: const InputDecoration(
+                                    hintText: "플랜 이름",
+                                    border: InputBorder.none,
+                                  ),
+                                  controller: titleTextController,
+                                  onChanged: (value) {
+                                    context
+                                        .read<PlanAdditionPageViewModel>()
+                                        .changeTitle(value);
+                                  },
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.black)),
                             )
                           ]),
                         ),
@@ -121,7 +119,10 @@ class _PlanNamingAdditionPageState extends State<PlanNamingAdditionPage> {
                             PlanAdditionPageViewModel viewModel, Widget? _) {
                       return ElevatedButton(
                         onPressed: viewModel.enableNextButtonForNaming
-                            ? () => print("next page~")
+                            ? () {
+                                context.push("/planCompleteAddition",
+                                    extra: viewModel);
+                              }
                             : null,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueAccent,

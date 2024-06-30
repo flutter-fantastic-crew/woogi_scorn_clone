@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scorn_clone/screens/home.dart';
+import 'package:scorn_clone/screens/plan_complete_addition_page.dart';
 import 'package:scorn_clone/screens/plan_detail_addition_page.dart';
 import 'package:scorn_clone/screens/plan_history_page.dart';
 import 'package:scorn_clone/screens/plan_naming_addition_page.dart';
@@ -31,6 +32,14 @@ void main() {
             pageBuilder: (BuildContext context, GoRouterState state) =>
                 MaterialPage(
                     child: PlanNamingAdditionPage(
+              viewModel: state.extra as PlanAdditionPageViewModel,
+            )),
+          ),
+          GoRoute(
+            path: 'planCompleteAddition',
+            pageBuilder: (BuildContext context, GoRouterState state) =>
+                MaterialPage(
+                    child: PlanCompleteAdditionPage(
               viewModel: state.extra as PlanAdditionPageViewModel,
             )),
           ),
