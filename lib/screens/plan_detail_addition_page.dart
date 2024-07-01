@@ -7,6 +7,7 @@ import 'package:scorn_clone/view_model/plan_addition_page_view_model.dart';
 import 'package:scorn_clone/widget/custom_appbar.dart';
 
 import '../util/CurrencyFormatter.dart';
+import '../widget/bottom_navigation_button.dart';
 import '../widget/plan_addition_page/range_calendar_widget.dart';
 import '../widget/row_text_field.dart';
 
@@ -128,34 +129,20 @@ class PlanDetailAdditionPage extends StatelessWidget {
                       ]),
                     ],
                   ),
-                  Consumer<PlanAdditionPageViewModel>(builder:
-                      (BuildContext context,
-                          PlanAdditionPageViewModel viewModel, Widget? _) {
-                    return ElevatedButton(
-                      onPressed: viewModel.enableNextButtonForDetail
-                          ? () => context.push("/planNamingAddition",
-                              extra: viewModel)
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        foregroundColor: Colors.white,
-                        disabledBackgroundColor: Colors.blueAccent[100],
-                        minimumSize: Size(700, 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      child: const Text("다음",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'PretendardBold',
-                            color: Colors.white,
-                          )),
-                    );
-                  }),
                 ],
               ),
             ),
           ),
+          bottomNavigationBar: Consumer<PlanAdditionPageViewModel>(builder:
+              (BuildContext context, PlanAdditionPageViewModel viewModel,
+                  Widget? _) {
+            return BottomNavigationButton(
+              onPressed: viewModel.enableNextButtonForDetail
+                  ? () => context.push("/planNamingAddition", extra: viewModel)
+                  : null,
+              text: "플랜 시작",
+            );
+          }),
         );
       },
     );

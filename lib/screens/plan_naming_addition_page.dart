@@ -9,6 +9,7 @@ import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.
 
 import '../util/CurrencyFormatter.dart';
 import '../view_model/range_calendar_view_model.dart';
+import '../widget/bottom_navigation_button.dart';
 import '../widget/plan_addition_page/range_calendar_widget.dart';
 import '../widget/row_text_field.dart';
 
@@ -114,36 +115,22 @@ class _PlanNamingAdditionPageState extends State<PlanNamingAdditionPage> {
                         ]),
                       ],
                     ),
-                    Consumer<PlanAdditionPageViewModel>(builder:
-                        (BuildContext context,
-                            PlanAdditionPageViewModel viewModel, Widget? _) {
-                      return ElevatedButton(
-                        onPressed: viewModel.enableNextButtonForNaming
-                            ? () {
-                                context.push("/planCompleteAddition",
-                                    extra: viewModel);
-                              }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
-                          foregroundColor: Colors.white,
-                          disabledBackgroundColor: Colors.blueAccent[100],
-                          minimumSize: Size(700, 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
-                        child: const Text("다음",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'PretendardBold',
-                              color: Colors.white,
-                            )),
-                      );
-                    }),
                   ],
                 ),
               ),
             ),
+            bottomNavigationBar: Consumer<PlanAdditionPageViewModel>(builder:
+                (BuildContext context, PlanAdditionPageViewModel viewModel,
+                    Widget? _) {
+              return BottomNavigationButton(
+                onPressed: viewModel.enableNextButtonForNaming
+                    ? () {
+                        context.push("/planCompleteAddition", extra: viewModel);
+                      }
+                    : null,
+                text: "다음",
+              );
+            }),
           );
         });
   }

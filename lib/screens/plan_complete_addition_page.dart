@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../util/number_util.dart';
 import '../view_model/plan_addition_page_view_model.dart';
+import '../widget/bottom_navigation_button.dart';
 import '../widget/custom_appbar.dart';
 
 class PlanCompleteAdditionPage extends StatelessWidget {
@@ -102,27 +103,11 @@ class PlanCompleteAdditionPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ElevatedButton(
-          onPressed: () {
-            viewModel.getPlanDataEntity;
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blueAccent,
-            foregroundColor: Colors.white,
-            disabledBackgroundColor: Colors.blueAccent[100],
-            minimumSize: const Size(700, 50),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          ),
-          child: const Text("플랜 시작",
-              style: TextStyle(
-                fontSize: 18,
-                fontFamily: 'PretendardBold',
-                color: Colors.white,
-              )),
-        ),
+      bottomNavigationBar: BottomNavigationButton(
+        onPressed: () {
+          viewModel.getPlanDataEntity;
+        },
+        text: "플랜 시작",
       ),
     );
   }
