@@ -11,7 +11,7 @@ import '../widget/plan_addition_page/range_calendar_widget.dart';
 import '../widget/row_text_field.dart';
 
 class PlanDetailAdditionPage extends StatelessWidget {
-  const PlanDetailAdditionPage({super.key});
+  PlanDetailAdditionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,11 @@ class PlanDetailAdditionPage extends StatelessWidget {
       create: (_) => PlanAdditionPageViewModel(),
       builder: (context, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Future.delayed(const Duration(milliseconds: 200))
-              .then((value) => showRangeCalendarBottomSheet(context));
+          if (context.read<PlanAdditionPageViewModel>().isFirst) {
+            Future.delayed(const Duration(milliseconds: 200))
+                .then((value) => showRangeCalendarBottomSheet(context));
+            context.read<PlanAdditionPageViewModel>().setIsFirstFalse();
+          }
         });
 
         return Scaffold(
@@ -68,7 +71,7 @@ class PlanDetailAdditionPage extends StatelessWidget {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                showRangeCalendarBottomSheet(context);
+                                // showRangeCalendarBottomSheet;
                               },
                               child: Consumer<PlanAdditionPageViewModel>(
                                 builder: (BuildContext context,

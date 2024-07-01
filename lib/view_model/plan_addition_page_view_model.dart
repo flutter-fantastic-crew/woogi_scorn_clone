@@ -14,6 +14,11 @@ class PlanAdditionPageViewModel with ChangeNotifier {
   int? amount;
   DateTime? startDate;
   DateTime? endDate;
+  bool isFirst = true;
+
+  void setIsFirstFalse() {
+    isFirst = false;
+  }
 
   void changeStartDate(DateTime dateTime) {
     startDate = dateTime;
