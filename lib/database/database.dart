@@ -6,6 +6,7 @@ import 'package:scorn_clone/database/table/plan_table.dart';
 import "package:path_provider/path_provider.dart";
 
 import 'dao/plan_dao.dart';
+import 'dto/plan_dto.dart';
 
 part 'database.g.dart';
 
