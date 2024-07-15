@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../util/number_util.dart';
 import '../view_model/plan_addition_page_view_model.dart';
@@ -106,6 +107,7 @@ class PlanCompleteAdditionPage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationButton(
         onPressed: () {
           viewModel.getPlanDataEntity;
+          context.go("/");
         },
         text: "플랜 시작",
       ),
