@@ -3,7 +3,7 @@ import 'package:drift/drift.dart';
 import '../dto/plan_dto.dart';
 
 @UseRowClass(PlanDto)
-class Plan extends Table {
+class Plans extends Table {
   IntColumn get id => integer().autoIncrement()();
   DateTimeColumn get startDate => dateTime()();
   DateTimeColumn get endDate => dateTime()();

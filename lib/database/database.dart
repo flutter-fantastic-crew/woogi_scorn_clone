@@ -2,6 +2,9 @@ import 'dart:io';
 import "package:path/path.dart" as p;
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:scorn_clone/database/dao/plan_history_dao.dart';
+import 'package:scorn_clone/database/dto/plan_history_dto.dart';
+import 'package:scorn_clone/database/table/plan_history_table.dart';
 import 'package:scorn_clone/database/table/plan_table.dart';
 import "package:path_provider/path_provider.dart";
 
@@ -10,7 +13,7 @@ import 'dto/plan_dto.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(tables: [Plan], daos: [PlanDao])
+@DriftDatabase(tables: [Plans, PlanHistories], daos: [PlanDao, PlanHistoryDao])
 class Database extends _$Database {
   Database._internal() : super(_openConnection());
   static final Database _instance = Database._internal();

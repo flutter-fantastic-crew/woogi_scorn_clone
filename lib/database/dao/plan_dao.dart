@@ -6,13 +6,13 @@ import '../table/plan_table.dart';
 
 part 'plan_dao.g.dart';
 
-@DriftAccessor(tables: [Plan])
+@DriftAccessor(tables: [Plans])
 class PlanDao extends DatabaseAccessor<Database> with _$PlanDaoMixin {
   PlanDao(super.db);
 
-  Future<List<PlanDto>> getAll() => db.select(plan).get();
+  Future<List<PlanDto>> getAll() => db.select(plans).get();
   Future<void> create(PlanDto planDto) async {
-    into(plan).insert(PlanCompanion(
+    into(plans).insert(PlansCompanion(
       startDate: Value(planDto.startDate),
       endDate: Value(planDto.endDate),
       type: Value(planDto.type),
