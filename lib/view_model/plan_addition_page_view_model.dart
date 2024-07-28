@@ -4,7 +4,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:scorn_clone/util/datetime_extension.dart';
 
-import '../entity/plan_data_entity.dart';
+import '../entity/plan_entity.dart';
 
 // notify 어디서 되는지 확인하기
 class PlanAdditionPageViewModel with ChangeNotifier {
@@ -65,9 +65,9 @@ class PlanAdditionPageViewModel with ChangeNotifier {
     return (title ?? "") != "";
   }
 
-  PlanDataEntity get getPlanDataEntity {
+  PlanEntity get getPlanDataEntity {
     //todo :: id 생성 방식
-    return PlanDataEntity(
+    return PlanEntity(
         planId: -1,
         planStartDate: startDate ?? DateTime.now(),
         planEndDate: endDate ?? DateTime.now(),

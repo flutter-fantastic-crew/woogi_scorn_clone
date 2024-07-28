@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import '../entity/plan_data_entity.dart';
+import '../entity/plan_entity.dart';
 import '../entity/plan_history_entity.dart';
 
 class HomePageViewModel with ChangeNotifier {
-  final List<PlanDataEntity> _plans = [
-    PlanDataEntity(
+  final List<PlanEntity> _plans = [
+    PlanEntity(
         planId: 0,
         planStartDate: DateTime.now(),
         planEndDate: DateTime.now().add(Duration(days: 15)),
@@ -27,7 +27,7 @@ class HomePageViewModel with ChangeNotifier {
             expenses: 5000,
           )
         ]),
-    PlanDataEntity(
+    PlanEntity(
         planId: 1,
         planStartDate: DateTime.now(),
         planEndDate: DateTime.now().add(Duration(days: 31)),
@@ -51,7 +51,7 @@ class HomePageViewModel with ChangeNotifier {
         ])
   ];
 
-  List<PlanDataEntity> get plans => _plans;
+  List<PlanEntity> get plans => _plans;
 
   int get totalConsumption {
     return _plans.where((element) => element.totalExpenses < 0).fold(
@@ -63,7 +63,7 @@ class HomePageViewModel with ChangeNotifier {
         0, (previousValue, element) => previousValue + element.totalExpenses);
   }
 
-  void addPlan(PlanDataEntity plan) {
+  void addPlan(PlanEntity plan) {
     _plans.add(plan);
     notifyListeners();
   }

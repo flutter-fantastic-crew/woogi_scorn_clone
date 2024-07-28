@@ -6,7 +6,7 @@ import 'package:scorn_clone/view_model/home_page_view_model.dart';
 import 'package:scorn_clone/widget/pie_chart.dart';
 import 'package:scorn_clone/widget/plan_type_circular_indicator.dart';
 
-import '../entity/plan_data_entity.dart';
+import '../entity/plan_entity.dart';
 import 'free_type_circular_indicator.dart';
 
 class PlanCardWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class PlanCardWidget extends StatelessWidget {
     Key? key,
     required this.plan,
   }) : super(key: key);
-  final PlanDataEntity plan;
+  final PlanEntity plan;
 
   @override
   Widget build(BuildContext context) {

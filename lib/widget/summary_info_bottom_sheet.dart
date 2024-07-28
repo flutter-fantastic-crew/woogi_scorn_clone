@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scorn_clone/widget/amount_plan_widget.dart';
 import 'package:scorn_clone/widget/amount_title_row.dart';
 
-import '../entity/plan_data_entity.dart';
+import '../entity/plan_entity.dart';
 import 'amount_title_column.dart';
 
 class SummaryInfoBottomSheet extends StatelessWidget {
@@ -15,7 +15,7 @@ class SummaryInfoBottomSheet extends StatelessWidget {
 
   int totalIncome;
   int totalConsumption;
-  final List<PlanDataEntity> planList;
+  final List<PlanEntity> planList;
 
   @override
   Widget build(BuildContext context) {
