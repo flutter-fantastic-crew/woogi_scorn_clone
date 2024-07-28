@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:scorn_clone/entity/plan_data_entity.dart';
+import 'package:scorn_clone/entity/plan_entity.dart';
 
 import 'circular_inner_plan_type_info.dart';
 import 'circular_inner_remaining_time.dart';
 
 class FreeTypeCircularIndicator extends StatefulWidget {
-  final PlanDataEntity plan;
+  final PlanEntity plan;
 
   const FreeTypeCircularIndicator({super.key, required this.plan});
 

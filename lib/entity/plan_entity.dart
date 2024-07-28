@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scorn_clone/entity/plan_history_entity.dart';
 
-class PlanDataEntity {
+class PlanEntity {
   int planId; // 플랜아이디
   DateTime planStartDate; // 플랜 시작일
   DateTime planEndDate; // 플랜 종료일
@@ -11,7 +11,7 @@ class PlanDataEntity {
   List<PlanHistoryEntity> planHistory; // 플랜예산 기록 리스트
   int? budget; // null == 수입, 예산
 
-  PlanDataEntity({
+  PlanEntity({
     required this.planId,
     required this.planStartDate,
     required this.planEndDate,
